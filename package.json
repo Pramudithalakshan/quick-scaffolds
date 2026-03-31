@@ -1,0 +1,7 @@
+{
+    "name": "quick-scaffolds",
+    "version": "1.0.0",
+    "bin": {
+        "create-dir": "./cli.js"
+    }
+}
