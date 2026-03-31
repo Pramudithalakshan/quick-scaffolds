@@ -1,7 +1,11 @@
 {
     "name": "quick-scaffolds",
     "version": "1.0.0",
+    "type": "module",
     "bin": {
-        "create-dir": "./cli.js"
+        "create-project": "./bin/cli.js"
+    },
+    "dependencies": {
+        "inquirer": "^13.3.2"
     }
 }

@@ -1,21 +1,42 @@
 #!/usr/bin/env node
 
-const fs = requires('fs').promises;
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import inquirer from 'inquirer';
 
-async function makeFolder(){
-    const folderName = process.argv[2];
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-    if(!folderName){
-        console.error("Please provide a folder name!");
-        process.exit(1);
-    }
+async function main() {
+    const answers = await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'projectName',
+            message: 'What is your project name?',
+            default: 'my-new-project'
+        },
+        {
+            type: 'list',
+            name: 'projectType',
+            message: 'What do you want to build?',
+            default: 'Static HTML/CSS/JS Page',
+            choices: ['Static HTML/CSS/JS'
+            ],
+        },
+    ]);
 
-    try{
-        await fs.mkdir(folderName);
-        console.log('Created folder - ${folderName}')
-    }catch (err){
+    const projectName = answers.projectName;
+    const targetPath = path.join(process.cwd(), projectName);
+    const templatePath = path.join(__dirname, '../templates');
+
+    try {
+        await fs.mkdir(targetPath, { recursive: true });
+        await fs.cp(templatePath, targetPath, { recursive: true });
+        console.log('Successfully scaffolded - ${answers.projectName}')
+    } catch (err) {
         console.error('Error - ${err.message}')
     }
 }
 
-makeFolder();
+main();
