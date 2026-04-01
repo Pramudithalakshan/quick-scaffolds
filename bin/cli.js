@@ -59,7 +59,7 @@ async function reactApp(projectName, templateFolder) {
 
         const filesToUpdate = [
             path.join(targetPath, 'package.json'),
-            path.join(targetPath, '/public/index.html')
+            path.join(targetPath, 'public','index.html')
         ];
         for (const filePath of filesToUpdate) {
             try {
