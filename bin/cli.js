@@ -23,13 +23,14 @@ async function main() {
             type: "list",
             choices: [
                 { name: 'Static HTML/CSS/JS', value: 'static' },
-
+                { name: 'React starter', value: 'react'}
             ],
         });
         let templateFolder = '';
         if (projectType === 'static') {
             templateFolder = 'html-template';
         }
+
 
         const projectName = name;
         const targetPath = path.join(process.cwd(), projectName);
@@ -43,5 +44,7 @@ async function main() {
         console.error(`Error - ${err.message}`)
     }
 }
+
+
 
 main();
