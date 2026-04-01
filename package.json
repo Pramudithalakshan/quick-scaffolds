@@ -1,6 +1,6 @@
 {
     "name": "quick-scaffolds-cli",
-    "version": "1.2.2",
+    "version": "1.2.4",
     "type": "module",
     "bin": {
         "ct-pro": "bin/cli.js"
