@@ -33,7 +33,7 @@ async function main() {
     try {
         await fs.mkdir(targetPath, { recursive: true });
         await fs.cp(templatePath, targetPath, { recursive: true });
-        console.log('Successfully scaffolded - ${answers.projectName}')
+        console.log('Successfully scaffolded the project')
     } catch (err) {
         console.error('Error - ${err.message}')
     }

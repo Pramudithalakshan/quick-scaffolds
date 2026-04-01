@@ -1,10 +1,14 @@
 {
-    "name": "quick-scaffolds",
+    "name": "quick-scaffolds-cli",
     "version": "1.0.0",
     "type": "module",
     "bin": {
-        "create-project": "./bin/cli.js"
+        "ct-pro": "bin/cli.js"
     },
+    "files": [
+        "bin",
+        "templates"
+    ],
     "dependencies": {
         "inquirer": "^13.3.2"
     }
