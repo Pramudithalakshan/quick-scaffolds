@@ -4,7 +4,9 @@ A lightweight, interactive CLI tool for rapidly scaffolding new web projects wit
 
 ## Overview
 
-**quick-scaffolds-cli** is an npm package that provides an interactive command-line interface to generate new projects from customizable templates. Get started with a fully structured project in seconds without manually creating directories or boilerplate files.
+**quick-scaffolds-cli** is an npm package that provides an interactive command-line interface to generate new projects from customizable templates. Get started with a fully structured project in seconds with an intuitive selection menu.
+
+**v1.1.0** - Now with improved interactive selection and project type options!
 
 ## Quick Start
 
@@ -37,14 +39,15 @@ Run the command and follow the interactive prompts:
 ```bash
 ct-pro
 ? What is your project name? my-awesome-app
-? What do you want to build? Static HTML/CSS/JS
-Successfully scaffolded the project
+? What do you want to build? (Use arrow keys)
+❯ Static HTML/CSS/JS
 ```
 
 You'll be guided through:
 
 1. **Project Name**: Enter your desired project name (default: `my-new-project`)
-2. **Project Type**: Choose a template type (`Static HTML/CSS/JS`)
+2. **Project Type**: Use arrow keys to select a template type:
+   - **Static HTML/CSS/JS** - A simple, lightweight static site starter with HTML, CSS, and JavaScript
 
 ### Generated Project Structure
 
@@ -61,11 +64,16 @@ my-awesome-app/
 
 ## Features
 
-- 🚀 **Interactive CLI** - User-friendly prompts powered by [inquirer.js](https://github.com/SBoudrias/Inquirer.js)
+- 🚀 **Interactive CLI** - Modern, intuitive prompts powered by [@inquirer/prompts](https://github.com/SBoudrias/Inquirer.js)
+- ⬆️⬇️ **Arrow Key Navigation** - Easy project type selection with arrow keys
 - 📁 **Template-Based** - Pre-built, production-ready project templates
 - ⚡ **Instant Setup** - Scaffold complete projects in seconds
 - 📦 **Lightweight** - Minimal dependencies and fast installation
 - 🧩 **Extensible** - Easy to add custom project templates
+
+## Available Templates
+
+- **Static HTML/CSS/JS** - Simple static website starter with basic HTML, CSS, and JavaScript boilerplate
 
 ## Project Structure
 
@@ -74,18 +82,25 @@ quick-scaffolds/
 ├── bin/
 │   └── cli.js              # CLI entry point
 ├── templates/              # Starter templates
-│   ├── index.html
-│   ├── css/
-│   │   └── style.css
-│   └── js/
-│       └── app.js
+│   └── html-template/      # Static HTML/CSS/JS template
+│       ├── index.html
+│       ├── css/
+│       │   └── style.css
+│       └── js/
+│           └── app.js
 ├── package.json
 └── README.md
 ```
 
 ## Dependencies
 
-- **inquirer** (^13.3.2) - Interactive command-line prompt library
+- **@inquirer/prompts** (^8.3.2) - Modern, interactive prompt library
+- **inquirer** (^13.3.2) - Command-line interface utilities
+
+## Version History
+
+- **v1.1.0** - Improved interactive selection with arrow key navigation, organized template structure
+- **v1.0.0** - Initial release with basic scaffolding functionality
 
 ## License
 
