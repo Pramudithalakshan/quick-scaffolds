@@ -78,7 +78,7 @@ my-awesome-app/
 ## Project Structure
 
 ```
-quick-scaffolds/
+quick-scaffolds-cli/
 ├── bin/
 │   └── cli.js              # CLI entry point
 ├── templates/              # Starter templates
