@@ -1,11 +1,16 @@
 {
-    "name": "quick-scaffolds",
-    "version": "1.0.0",
+    "name": "quick-scaffolds-cli",
+    "version": "1.1.0",
     "type": "module",
     "bin": {
-        "create-project": "./bin/cli.js"
+        "ct-pro": "bin/cli.js"
     },
+    "license": "MIT",
+    "files": [
+        "bin",
+        "templates"
+    ],
     "dependencies": {
-        "inquirer": "^13.3.2"
+        "@inquirer/prompts": "^8.3.2"
     }
 }
