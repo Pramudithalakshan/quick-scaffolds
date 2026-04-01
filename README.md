@@ -6,7 +6,7 @@ A lightweight interactive CLI for scaffolding starter web projects quickly.
 
 quick-scaffolds-cli generates a ready-to-use project from templates with a simple prompt flow.
 
-Current release: v1.2.1
+Current release: v1.2.2
 
 ## Quick Start
 
@@ -16,7 +16,7 @@ Install once and use the command anywhere:
 
 ```bash
 npm install -g quick-scaffolds-cli
-ct-pro
+ct-pro my-awesome-app
 ```
 
 ### Use with npx
@@ -24,16 +24,16 @@ ct-pro
 Run without installing globally:
 
 ```bash
-npx quick-scaffolds-cli
+npx quick-scaffolds-cli my-awesome-app
 ```
 
 ## Usage
 
-Run the CLI and answer two prompts:
+Run the CLI with an initial project name, then choose whether to keep it or change it:
 
 ```bash
-ct-pro
-? What is your project name? my-awesome-app
+ct-pro my-awesome-app
+? Your project name will be named "my-awesome-app". Do you want to keep it? (Y/n)
 ? What do you want to build?
   Static HTML/CSS/JS
   React starter
@@ -41,10 +41,18 @@ ct-pro
 
 Prompt details:
 
-1. Project name (default: my-new-project)
+1. Confirm project name:
+  - Keep the provided name
+  - Change it by entering a new project name (default: `my-new-project`)
 2. Project type:
    - Static HTML/CSS/JS
    - React starter
+
+If you choose not to keep the provided name, the CLI asks:
+
+```bash
+? What is your project name? my-updated-app
+```
 
 ## Templates
 
@@ -71,10 +79,10 @@ Generated structure:
 
 ```text
 my-awesome-app/
+├── .gitignore
+├── index.css
+├── index.html
 ├── package.json
-├── public/
-│   ├── index.html
-│   └── index.css
 └── src/
     ├── App.css
     ├── App.jsx
@@ -101,8 +109,13 @@ npm run dev
 
 ```text
 quick-scaffolds-cli/
+├── .gitignore
+├── .npmignore
 ├── bin/
 │   └── cli.js
+├── package-lock.json
+├── package.json
+├── README.md
 ├── templates/
 │   ├── html-template/
 │   │   ├── index.html
@@ -111,17 +124,16 @@ quick-scaffolds-cli/
 │   │   └── js/
 │   │       └── app.js
 │   └── react-template/
+│       ├── .gitignore
+│       ├── index.css
+│       ├── index.html
 │       ├── package.json
-│       ├── public/
-│       │   ├── index.css
-│       │   └── index.html
 │       └── src/
 │           ├── App.css
 │           ├── App.jsx
 │           ├── index.css
 │           └── main.jsx
-├── package.json
-└── README.md
+└── LICENSE
 ```
 
 ## Dependencies
@@ -134,4 +146,4 @@ MIT
 
 ## Contributing
 
-Issues and pull requests are welcome on github.
+Issues and pull requests are welcome on GitHub.
