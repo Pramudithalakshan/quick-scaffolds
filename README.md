@@ -1,30 +1,27 @@
 # quick-scaffolds-cli
 
-A lightweight, interactive CLI tool for rapidly scaffolding new web projects with pre-configured starter templates.
+A lightweight interactive CLI for scaffolding starter web projects quickly.
 
 ## Overview
 
-**quick-scaffolds-cli** is an npm package that provides an interactive command-line interface to generate new projects from customizable templates. Get started with a fully structured project in seconds with an intuitive selection menu.
+quick-scaffolds-cli generates a ready-to-use project from templates with a simple prompt flow.
 
-**v1.1.0** - Now with improved interactive selection and project type options!
+Current release: v1.2.1
 
 ## Quick Start
 
-### Global Installation
+### Global install
 
-Install globally to use the `ct-pro` command anywhere:
+Install once and use the command anywhere:
 
 ```bash
 npm install -g quick-scaffolds-cli
-```
-
-Then create a new project:
-
-```bash
 ct-pro
 ```
 
-### Using npx (No Installation Required)
+### Use with npx
+
+Run without installing globally:
 
 ```bash
 npx quick-scaffolds-cli
@@ -32,28 +29,32 @@ npx quick-scaffolds-cli
 
 ## Usage
 
-### Creating a New Project
-
-Run the command and follow the interactive prompts:
+Run the CLI and answer two prompts:
 
 ```bash
 ct-pro
 ? What is your project name? my-awesome-app
-? What do you want to build? (Use arrow keys)
-❯ Static HTML/CSS/JS
+? What do you want to build?
+  Static HTML/CSS/JS
+  React starter
 ```
 
-You'll be guided through:
+Prompt details:
 
-1. **Project Name**: Enter your desired project name (default: `my-new-project`)
-2. **Project Type**: Use arrow keys to select a template type:
-   - **Static HTML/CSS/JS** - A simple, lightweight static site starter with HTML, CSS, and JavaScript
+1. Project name (default: my-new-project)
+2. Project type:
+   - Static HTML/CSS/JS
+   - React starter
 
-### Generated Project Structure
+## Templates
 
-The scaffolded project will include:
+### 1. Static HTML/CSS/JS
 
-```
+Creates a simple static site starter.
+
+Generated structure:
+
+```text
 my-awesome-app/
 ├── index.html
 ├── css/
@@ -62,45 +63,70 @@ my-awesome-app/
     └── app.js
 ```
 
+### 2. React starter (Vite)
+
+Creates a React starter app with Vite and automatically runs npm install.
+
+Generated structure:
+
+```text
+my-awesome-app/
+├── package.json
+├── public/
+│   ├── index.html
+│   └── index.css
+└── src/
+    ├── App.css
+    ├── App.jsx
+    ├── index.css
+    └── main.jsx
+```
+
+After scaffolding a React project:
+
+```bash
+cd my-awesome-app
+npm run dev
+```
+
 ## Features
 
-- 🚀 **Interactive CLI** - Modern, intuitive prompts powered by [@inquirer/prompts](https://github.com/SBoudrias/Inquirer.js)
-- ⬆️⬇️ **Arrow Key Navigation** - Easy project type selection with arrow keys
-- 📁 **Template-Based** - Pre-built, production-ready project templates
-- ⚡ **Instant Setup** - Scaffold complete projects in seconds
-- 📦 **Lightweight** - Minimal dependencies and fast installation
-- 🧩 **Extensible** - Easy to add custom project templates
-
-## Available Templates
-
-- **Static HTML/CSS/JS** - Simple static website starter with basic HTML, CSS, and JavaScript boilerplate
+- Interactive CLI powered by @inquirer/prompts
+- Fast project scaffolding from local templates
+- Two starter options: static web or React + Vite
+- Automatic dependency installation for React template
+- Simple command interface via ct-pro
 
 ## Project Structure
 
-```
+```text
 quick-scaffolds-cli/
 ├── bin/
-│   └── cli.js              # CLI entry point
-├── templates/              # Starter templates
-│   └── html-template/      # Static HTML/CSS/JS template
-│       ├── index.html
-│       ├── css/
-│       │   └── style.css
-│       └── js/
-│           └── app.js
+│   └── cli.js
+├── templates/
+│   ├── html-template/
+│   │   ├── index.html
+│   │   ├── css/
+│   │   │   └── style.css
+│   │   └── js/
+│   │       └── app.js
+│   └── react-template/
+│       ├── package.json
+│       ├── public/
+│       │   ├── index.css
+│       │   └── index.html
+│       └── src/
+│           ├── App.css
+│           ├── App.jsx
+│           ├── index.css
+│           └── main.jsx
 ├── package.json
 └── README.md
 ```
 
 ## Dependencies
 
-- **@inquirer/prompts** (^8.3.2) - Modern, interactive prompt library
-- **inquirer** (^13.3.2) - Command-line interface utilities
-
-## Version History
-
-- **v1.1.0** - Improved interactive selection with arrow key navigation, organized template structure
-- **v1.0.0** - Initial release with basic scaffolding functionality
+- @inquirer/prompts ^8.3.2
 
 ## License
 
@@ -108,4 +134,4 @@ MIT
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit pull requests or open issues to suggest improvements.
+Issues and pull requests are welcome on github.
