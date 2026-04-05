@@ -3,30 +3,20 @@ import { execSync } from 'node:child_process';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { input, select, confirm } from '@inquirer/prompts';
+import { input, select } from '@inquirer/prompts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 async function main() {
-    let name = process.argv[2];
-
-    const keepName = await confirm({
-        message: `Your project name will be named "${name}". Do you want to keep it ?`,
-        default: true
-    });
-
-    if (!keepName) {
-        name = await input(
-            {
-                name: 'projectName',
-                message: 'What is your project name?',
-                type: 'input',
-                default: 'my-new-project'
-            }
-        );
-    }
-
+    const name = await input(
+        {
+            name: 'projectName',
+            message: 'What is your project name will be ? (Type "." to use the current directory)',
+            type: 'input',
+            default: 'my-new-project'
+        }
+    );
     const projectType = await select({
         message: 'What do you want to build?',
         type: "list",
@@ -47,12 +37,15 @@ async function main() {
     }
     try {
         const projectName = name;
-        const targetPath = path.join(process.cwd(), projectName);
+        const targetPath = projectName === '.' ? process.cwd() : path.join(process.cwd(), projectName);
 
         const templatePath = path.join(__dirname, '../templates', templateFolder);
-        await fs.mkdir(targetPath, { recursive: true });
+        if (projectName !== '.') {
+            await fs.mkdir(targetPath, { recursive: true });
+        }
         await fs.cp(templatePath, targetPath, { recursive: true });
-        console.log(`\nSuccessfully scaffolded the HTMl project - ${projectName}\n`)
+        const displayName = projectName === '.' ? path.basename(process.cwd()) : projectName;
+        console.log(`\nSuccessfully scaffolded the HTMl project - ${displayName}\n`)
 
     } catch (err) {
         console.error(`Error - ${err.message}`)
@@ -61,9 +54,14 @@ async function main() {
 
 async function reactApp(projectName, templateFolder) {
     try {
-        const targetPath = path.join(process.cwd(), projectName);
+        const isCurrentDirectory = projectName === '.';
+        const targetPath = isCurrentDirectory ? process.cwd() : path.join(process.cwd(), projectName);
+        const displayName = isCurrentDirectory ? path.basename(process.cwd()) : projectName;
+
         const templatePath = path.join(__dirname, '../templates', templateFolder);
-        await fs.mkdir(targetPath, { recursive: true });
+        if (!isCurrentDirectory) {
+            await fs.mkdir(targetPath, { recursive: true });
+        }
         await fs.cp(templatePath, targetPath, { recursive: true })
 
         const filesToUpdate = [
@@ -73,15 +71,15 @@ async function reactApp(projectName, templateFolder) {
         for (const filePath of filesToUpdate) {
             try {
                 const content = await fs.readFile(filePath, 'utf-8');
-                const updateContent = content.replaceAll('{{PROJECT_NAME}}', projectName);
+                const updateContent = content.replaceAll('{{PROJECT_NAME}}', displayName);
                 await fs.writeFile(filePath, updateContent);
-            } catch (err) {
+            } catch (err) {await fs.mkdir(targetPath, { recursive: true });
                 console.error(err);
                 console.error(`File path ${path.basename(filePath)} not found`);
             }
         }
 
-        console.log(`Successfully scaffolded the React starter project - ${projectName}\n`)
+        console.log(`Successfully scaffolded the React starter project - ${displayName}\n`)
         console.log('📦 Installing dependencies... This may take a minute.\n');
         try {
             execSync('npm install', {
