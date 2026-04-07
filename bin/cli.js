@@ -3,7 +3,7 @@ import { execSync } from 'node:child_process';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { input, select } from '@inquirer/prompts';
+import { input, select, confirm } from '@inquirer/prompts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -73,7 +73,8 @@ async function reactApp(projectName, templateFolder) {
                 const content = await fs.readFile(filePath, 'utf-8');
                 const updateContent = content.replaceAll('{{PROJECT_NAME}}', displayName);
                 await fs.writeFile(filePath, updateContent);
-            } catch (err) {await fs.mkdir(targetPath, { recursive: true });
+            } catch (err) {
+                await fs.mkdir(targetPath, { recursive: true });
                 console.error(err);
                 console.error(`File path ${path.basename(filePath)} not found`);
             }
@@ -87,6 +88,21 @@ async function reactApp(projectName, templateFolder) {
                 stdio: 'inherit'
             });
             console.log('✅ Dependencies installed successfully!\n');
+
+            const addRouterQuestion = await confirm({
+                    message: 'Whould you like to setup React Router for navigation ?',
+                    default: true
+                })
+            
+            if (addRouterQuestion) {
+                console.log('Adding React Router...📦')
+                execSync('npm install react-router-dom', {
+                    cwd: targetPath,
+                    stdio: 'inherit'
+                });
+                console.log('✅ Successfully added React Router');
+                
+            }
         } catch (err) {
             console.error(err);
             console.log('⚠️ Could not install dependencies automatically.\n');
