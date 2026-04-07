@@ -1,12 +1,12 @@
 # quick-scaffolds-cli
 
-A lightweight interactive CLI for scaffolding starter web projects quickly.
+A lightweight, interactive CLI for scaffolding starter web projects in seconds.
 
 ## Overview
 
-quick-scaffolds-cli generates a ready-to-use project from templates with a simple prompt flow.
+quick-scaffolds-cli is a command-line tool that generates ready-to-use web project starters with zero configuration. Answer a few simple prompts and get a fully structured project—choose between static HTML/CSS/JS or a modern React + Vite setup.
 
-Current release: v1.2.6
+**Current release:** v1.3.0 | **License:** MIT
 
 ## Quick Start
 
@@ -35,26 +35,26 @@ Run the CLI and answer the prompts:
 ct-pro
 ? What is your project name will be ? (Type "." to use the current directory) my-awesome-app
 ? What do you want to build?
-  Static HTML/CSS/JS
-  React starter
+  ❯ Static HTML/CSS/JS
+    React starter
 ```
 
-Prompt details:
+### Prompt Details
 
-1. Project name:
-  - Enter a new folder name (default: `my-new-project`)
-  - Enter `.` to scaffold in the current directory
-2. Project type:
-   - Static HTML/CSS/JS
-   - React starter
+**1. Project Name**
+- Enter a new folder name to create a new directory (default: `my-new-project`)
+- Enter `.` to scaffold directly in the current directory
+
+**2. Project Type**
+- **Static HTML/CSS/JS:** A simple, lightweight static site starter—perfect for learning or quick prototypes
+- **React starter:** A modern React app with Vite, ESM modules, and optional React Router setup for navigation
 
 ## Templates
 
 ### 1. Static HTML/CSS/JS
+A simple, minimal starter template for static web projects.
 
-Creates a simple static site starter.
-
-Generated structure:
+**Generated structure:**
 
 ```text
 my-awesome-app/
@@ -65,17 +65,26 @@ my-awesome-app/
     └── app.js
 ```
 
-### 2. React starter (Vite)
+**Next steps:**
+```bash
+cd my-awesome-app
+# Open index.html in your browser
+```
 
-Creates a React starter app with Vite, includes an interactive test component, and automatically runs npm install.
+---
 
-Generated structure:
+### 2. React Starter (Vite + Modern ESM)
+
+A modern React starter with Vite, automatic dependency installation, and optional React Router setup.
+
+**Generated structure:**
 
 ```text
 my-awesome-app/
 ├── .gitignore
 ├── index.html
 ├── package.json
+├── vite.config.js
 ├── public/
 │   └── index.css
 └── src/
@@ -85,44 +94,80 @@ my-awesome-app/
     └── main.jsx
 ```
 
-After scaffolding a React project:
+**Interactive setup:**
+- 📦 Automatically installs npm dependencies after scaffolding
+- 🛣️ Prompts to install **React Router** for navigation (optional)
+✨ **Interactive CLI** — User-friendly prompts powered by [@inquirer/prompts](https://www.npmjs.com/package/@inquirer/prompts)
 
-```bash
-cd my-awesome-app
-npm run dev
+⚡ **Zero Configuration** — Choose a template and get a working project instantly
+
+🎨 **Two Templates:**
+- Static HTML/CSS/JS for simple projects
+- React + Vite with modern ESM module support
+
+🛣️ **React Router Setup** — Optional routing configuration for multi-page React apps
+
+📦 **Automatic Dependencies** — npm install runs automatically for React projects
+
+🎯 **Current Directory Support** — Use `.` to scaffold in your existing folder
+
+🚀 **Simple Command Interface** — Just run `ct-pro` from anywhere
 ```
 
+The generated app includes a counter button in `App.jsx` so you can immediately see React state updates in action
 The generated app includes a counter button and last-click timestamp in `App.jsx` so you can quickly confirm rendering and state updates.
 
 ## Features
 
-- Interactive CLI powered by @inquirer/prompts
-- Fast project scaffolding from local templates
-- Two starter options: static web or React + Vite
-- Supports scaffolding in the current directory using `.`
-- Automatic dependency installation for React template
-- Simple command interface via ct-pro
+### React Project is Blank
 
-## Troubleshooting
-
-- If the React page is blank, run the dev server inside your generated project folder:
+Ensure you're running the development server:
 
 ```bash
 cd my-awesome-app
 npm run dev
 ```
 
-- The React entry flow is:
-  - `index.html` loads `./src/main.jsx`
-  - `main.jsx` renders `App.jsx`
+Then open http://localhost:5173 in your browser.
 
-- If browser console shows `React is not defined`, ensure your `App.jsx` starts with:
+### React Entry Point
 
-```jsx
-import React from 'react';
-```
+The React app boots in this order:
+1. `index.html` loads your app into the root div
+2. `src/main.jsx` renders the React app
+3. `App.jsx` is the root React component
 
-## Project Structure
+### Dependencies Installation Failed
+The quick-scaffolds-cli repository is organized as follows:
+
+```text
+quick-scaffolds-cli/
+├── LICENSE
+├── README.md
+├── package.json
+├── bin/
+│   └── cli.js                    # Main CLI entry point
+├── templates/
+│   ├── html-template/            # Static web starter
+│   │   ├── index.html
+│   │   ├── css/
+│   │   │   └── style.css
+│   │   └── js/
+│   │       └── app.js
+│   └── react-template/           # React + Vite starter
+│       ├── .gitignore
+│       ├── index.html
+│       ├── package.json
+│       ├── vite.config.js
+│       ├── public/
+│       │   └── index.css
+│       └── src/
+│           ├── App.css
+│           ├── App.jsx
+│           ├── index.css
+│           ├── main.jsx
+│           └── pages/            # (created if React Router is selected)
+│               └── Home.jsx
 
 ```text
 quick-scaffolds-cli/
