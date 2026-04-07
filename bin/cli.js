@@ -90,18 +90,56 @@ async function reactApp(projectName, templateFolder) {
             console.log('✅ Dependencies installed successfully!\n');
 
             const addRouterQuestion = await confirm({
-                    message: 'Whould you like to setup React Router for navigation ?',
-                    default: true
-                })
-            
+                message: 'Whould you like to setup React Router for navigation ?',
+                default: true
+            })
+
             if (addRouterQuestion) {
                 console.log('Adding React Router...📦')
                 execSync('npm install react-router-dom', {
                     cwd: targetPath,
                     stdio: 'inherit'
                 });
-                console.log('✅ Successfully added React Router');
-                
+                const routerAppCode = `
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import React from 'react';
+
+function App() {
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<Home />} />
+            </Routes>
+        </Router>
+    );
+}
+
+export default App;
+
+             `;
+             const appJsxPath = path.join(targetPath, 'src', 'App.jsx');
+             await fs.writeFile(appJsxPath, routerAppCode);
+             const pageDirPath = path.join(targetPath, 'src', 'pages');
+             await fs.mkdir(pageDirPath, { recursive: true});
+             const homeComponentCode =`
+
+import React from 'react';
+
+export default function Home() {
+    return (
+        <div>
+            <h1>Welcome Home 🏠</h1>
+            <p>Your React Router is up and running!</p>
+        </div>
+    );
+}
+             `;
+             const homeComponentPath = path.join(pageDirPath, 'Home.jsx');
+             await fs.writeFile(homeComponentPath, homeComponentCode);
+             console.log('✅ Successfully added React Router');
+
             }
         } catch (err) {
             console.error(err);
